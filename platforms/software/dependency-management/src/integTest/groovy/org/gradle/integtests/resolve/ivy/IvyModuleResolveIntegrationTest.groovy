@@ -100,7 +100,7 @@ task retrieve(type: Sync) {
                 ivy { url = "${ivyRepo.uri}" }
             }
             dependencies {
-                compile group: 'test', name: 'target', version: '1.0', configuration: 'x86_windows'
+                compile("test:target:1.0") {
             }
             task retrieve(type: Sync) {
               from configurations.compile
@@ -130,7 +130,7 @@ repositories {
     ivy { url = "${ivyRepo.uri}" }
 }
 dependencies {
-    compile group: 'test', name: 'target', version: '1.0', configuration: 'something'
+    compile("test:target:1.0") {
 }
 task retrieve(type: Sync) {
   from configurations.compile
@@ -153,7 +153,9 @@ dependencies {
     repositories {
         ivy { url = "${ivyHttpRepo.uri}" }
     }
-    compile group: 'ivy.configuration', name: 'projectA', version: '1.2', configuration: 'a'
+    compile("ivy.configuration:projectA:1.2") {
+        targetConfiguration = "a"
+    }
 }
 task retrieve(type: Sync) {
   from configurations.compile
@@ -348,7 +350,9 @@ task retrieve(type: Sync) {
         ivy { url = "${ivyRepo.uri}" }
     }
     dependencies {
-        compile group: 'ivy.configuration', name: 'projectA', version: '1.2', configuration: 'a'
+        compile("ivy.configuration:projectA:1.2") {
+            targetConfiguration = "a"
+        }
     }
     task retrieve(type: Sync) {
       from configurations.compile

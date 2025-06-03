@@ -67,7 +67,9 @@ abstract class AbstractDependencyMetadataRulesIntegrationTest extends AbstractMo
         } else {
             buildFile << """
                 dependencies {
-                    $variantToTest group: 'org.test', name: 'moduleA', version: '1.0', configuration: '$variantToTest'
+                    $variantToTest("org.test:moduleA:1.0") {
+                        targetConfiguration = "$variantToTest"
+                    }
                 }
             """
         }
@@ -794,7 +796,11 @@ abstract class AbstractDependencyMetadataRulesIntegrationTest extends AbstractMo
             configurations { anotherConfiguration { attributes { attribute(Attribute.of('format', String), 'custom') } } }
 
             dependencies {
-                anotherConfiguration group: 'org.test', name: 'moduleA', version: '1.0' ${publishedModulesHaveAttributes || useMaven() ? "" : ", configuration: '$variantToTest'"}
+                anotherConfiguration("org.test:moduleA:1.0") {
+                    if (${publishedModulesHaveAttributes || useMaven()}) {
+                        targetConfiguration = "$variantToTest"
+                    }
+                }
             }
 
             dependencies {
@@ -847,7 +853,11 @@ abstract class AbstractDependencyMetadataRulesIntegrationTest extends AbstractMo
             }
 
             dependencies {
-                $variantToTest group: 'org.test', name: 'moduleB', version: '1.1' ${publishedModulesHaveAttributes || useMaven() ? "" : ", configuration: '$variantToTest'"}
+                $variantToTest("org.test:moduleB:1.1") {
+                    if (${publishedModulesHaveAttributes || useMaven()}) {
+                        targetConfiguration = "$variantToTest"
+                    }
+                }
 
                 components {
                     withModule('org.test:moduleA', ModifyRule)
@@ -912,7 +922,11 @@ abstract class AbstractDependencyMetadataRulesIntegrationTest extends AbstractMo
             }
 
             dependencies {
-                $variantToTest group: 'org.test', name: 'moduleB', version: '1.1' ${publishedModulesHaveAttributes || useMaven() ? "" : ", configuration: '$variantToTest'"}
+                $variantToTest("org.test:moduleB:1.1") {
+                    if (${publishedModulesHaveAttributes || useMaven()}) {
+                        targetConfiguration = "$variantToTest"
+                    }
+                }
 
                 components {
                     withModule('org.test:moduleA', ModifyRule)
