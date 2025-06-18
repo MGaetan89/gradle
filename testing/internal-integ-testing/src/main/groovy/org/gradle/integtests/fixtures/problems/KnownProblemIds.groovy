@@ -87,7 +87,7 @@ class KnownProblemIds {
         'compilation:java:compiler.*': ['.*'],
         'compilation:java:initialization-failed': ['Java compilation initialization error'],
         'dependency-version-catalog:alias-not-finished': ['Problem: In version catalog libs, dependency alias builder \'my.great.lib\' was not finished.'],
-        'dependency-version-catalog:invalid-dependency-notation': ['Dependency version catalog problem'],
+        'dependency-version-catalog:invalid-dependency-notation': ['Invalid dependency notation in TOML file'],
         'dependency-version-catalog:reserved-alias-name': ["class",
                                                            "my-class",
                                                            "my-class-lib",
@@ -101,7 +101,7 @@ class KnownProblemIds {
                                                            "plugins-my"]
             .collect { 'Problem: In version catalog libs, alias \'' + it + '\' is not a valid alias\\.' },
     'dependency-version-catalog:catalog-file-does-not-exist' : [ 'Problem: In version catalog libs, import of external catalog file failed.' ],
-    'dependency-version-catalog:toml-syntax-error' : [ 'Dependency version catalog problem' ],
+    'dependency-version-catalog:toml-syntax-error' : [ 'TOML syntax invalid.' ],
     'dependency-version-catalog:too-many-import-files' : [ 'Problem: In version catalog testLibs, importing multiple files are not supported.' ],
     'dependency-version-catalog:too-many-import-invocation' : [ 'Problem: In version catalog testLibs, you can only call the \'from\' method a single time.' ],
     'dependency-version-catalog:no-import-files' : [ 'Problem: In version catalog testLibs, no files are resolved to be imported.' ],
